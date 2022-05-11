@@ -1,35 +1,43 @@
 import './App.css';
 
-const buttonA = <button>Histórico dos clientes</button>
-const buttonB = <button>Cadastrar Cliente</button>
-const customer = 'Anderson Clayton'
-
-const hasCostumer = true
+const customer = [
+  {
+    id: 1,
+    name: 'Anderson Clayton',
+    skills: ['HTML', 'React', 'Node', 'Webpack']
+  },
+  {
+    id: 2,
+    name: 'José Antônio',
+    skills: ['Lua', 'Java', 'Go', 'CSS']
+  },
+  {
+    id: 3,
+    name: 'Maria Priscila',
+    skills: ['Cobol', 'C sharp', 'Python', 'Linguagem C']
+  },
+  {
+    id: 4,
+    name: 'Alcindo Nogueira',
+    skills: ['Ruby', 'C++', 'Visual Basic', 'PHP']
+  }
+]
 
 const App = () => {
 
-  const renderShowHistory = () => (
-    <div>
-      Clique no botão abaixo para visualizar o histórico dos clientes
-      <br/>
-      {buttonA}
-    </div>
-  )
-
-  const renderAddCustomer = () => (
-    <div>
-      Clique abaixo para cadastrar o cliente
-      <br/>
-      {buttonB}
-    </div>
-  )
-
-  const showCustomer = () => {
-    if (!hasCostumer) return null
-
+  const renderCustomer = (customer, index) => {
     return (
-      <div>
-        <h1>Nome do cliente: Anderson Clayton</h1>
+      <div key={`customer-${customer.id}`}>
+        <li>{customer.name}</li>
+        {customer.skills.map(renderSkills)}
+      </div>
+    )
+  }
+
+  const renderSkills = (skill, index) => {
+    return (
+      <div style={{paddingLeft: '30px'}} key={`skill-${index}`}>
+        <li>{skill}</li>
       </div>
     )
   }
@@ -38,9 +46,10 @@ const App = () => {
     <div>
       <p>Digital Innovation One</p>
       <p>Bem vindo à nossa aula =D.</p>
-      {hasCostumer ? renderShowHistory() : renderAddCustomer()}
       <div>
-        {showCustomer()}
+        <ul>
+          {customer.map(renderCustomer)}
+        </ul>
       </div>
     </div>
   );
